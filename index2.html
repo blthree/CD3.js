@@ -2,7 +2,7 @@
 <html>
 <head>
 </head>
-<button id="openFile" onclick="openFile()">Open</button>
+<button id="openFileButton">Open</button>
 <button id="redirect" onclick="redirect_w_cookie()">Redirect</button>
 <br />
 
@@ -12,7 +12,7 @@ var dialog = app.dialog;
 var session = app.session;
 
         //const cookie = {url: 'http://www.github.com', name: 'dummy_name', value: 'dummy'}
-function redirect_w_cookie () {
+//function redirect_w_cookie () {
     //var cookie = {url: 'file://' + __dirname + '/index.html', name: 'fileName', value: 'xzy123.txt'}
     //const cookie = {url: 'http://www.benson.fyi', name: 'fileName', value: 'dummy'}
     //var cookie = {name: 'fileName', value: 'xzy123.txt'}
@@ -20,10 +20,10 @@ function redirect_w_cookie () {
     //session.defaultSession.cookies.set(cookie, (error) => {
       //  if (error) console.error(error)
     //})
-    session.defaultSession.cookies.get({name: 'fileName'}, function getFileNameCookie (err, cookies) {
-            console.log(cookies[0].value)})
-    location.href='file://' + __dirname + '/index.html' //?data-file=xzy123.txt'
-}    
+    //session.defaultSession.cookies.get({name: 'fileName'}, function getFileNameCookie (err, cookies) {
+   //         console.log(cookies[0].value)})
+   // location.href='file://' + __dirname + '/index.html' //?data-file=xzy123.txt'
+//}    
     </script>
 </body>
 <script type="text/javascript" src="./index2.js"></script>
