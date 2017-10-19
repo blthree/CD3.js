@@ -1,6 +1,6 @@
-module.exports = function (callback) {
+module.exports = function (fileName, callback) {
     var fs = require('fs')
-    data = fs.readFile('barcode_data.tab', function (err, data) {
+    data = fs.readFile(fileName, function (err, data) {
         if (err) {
             console.log(err)
             return(callback(err))
