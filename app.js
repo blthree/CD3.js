@@ -1,7 +1,4 @@
 var electron = require('electron');
-const {
-  session
-} = require('electron');
 const Store = require('electron-store');
 const store = new Store();
 
