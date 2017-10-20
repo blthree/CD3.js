@@ -1,4 +1,3 @@
-    var loadtsv = require("./load-tsv")
     var app = require('electron').remote;
     var dialog = app.dialog;
     var session = app.session;
