@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 </head>
+
 <body OnLoad="document.getElementById('search-box').focus();">
-    <button id="openFileButton">Open</button> <br />
-  Sample Barcode for testing: <div id="sample-barcode">0055122673</div>
-  <input type="button" class="sample-code" id="test-sample-code" value="Search using test barcode" onclick="test_func()">
+    <button id="openFileButton">Open</button>
+    <br /> Sample Barcode for testing:
+    <div id="sample-barcode">0055122673</div>
+    <input type="button" class="sample-code" id="test-sample-code" value="Search using test barcode" onclick="test_func()">
     <div id="data-file"></div>
     <label>Barcode:</label>
     <input type="button" class="testB" id="testB" value="search">
     <input type="test" class="search-code" id="search-box">
-<div id="search-results"></div>
+    <div id="search-results"></div>
 </body>
 <script type="text/javascript" src="./barcode-search.js"></script>
 <script type="text/javascript" src="./load-barcodes.js"></script>
@@ -18,4 +21,5 @@
     <script>var search_barcode = require('./index.js');
         !-->
 </script>
+
 </html>
