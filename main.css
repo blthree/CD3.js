@@ -69,3 +69,10 @@ padding: 0px;
 .square-button {
     padding: 5px;
 }
+#card-header {
+    font-size: 24px;
+    font-weight: bold;
+}
+#stock-result {
+    padding: 6px;
+}

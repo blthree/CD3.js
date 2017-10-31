@@ -18,11 +18,11 @@
         console.log("Searching")
         results = store.get('barcode_data.' + searchCode);
             document.getElementById('search-results').textContent = JSON.stringify(results);
-            document.getElementById('stock-result').textContent = JSON.stringify(results.StockNum);
-            document.getElementById('clone-result').textContent = JSON.stringify(results.CloneName);
-            document.getElementById('box-result').textContent = JSON.stringify(results.Box);
-            document.getElementById('position-result').textContent = JSON.stringify(results.Position);
-            document.getElementById('barcode-result').textContent = JSON.stringify(searchCode);
+            document.getElementById('stock-result').textContent = JSON.stringify(results.StockNum).replace(/\"/g, '');
+            document.getElementById('clone-result').textContent = JSON.stringify(results.CloneName).replace(/\"/g, '');
+            document.getElementById('box-result').textContent = JSON.stringify(results.Box).replace(/\"/g, '');
+            document.getElementById('position-result').textContent = JSON.stringify(results.Position).replace(/\"/g, '');
+            document.getElementById('barcode-result').textContent = JSON.stringify(searchCode).replace(/\"/g, '');
         document.getElementById('search-box').value = "";
         document.getElementById('search-box').focus();
         }
