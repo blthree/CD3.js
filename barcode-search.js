@@ -15,7 +15,7 @@
         document.getElementById('search-box').value = "";
         document.getElementById('search-box').focus();
     }
-    document.querySelector("[id='testB']").addEventListener('click', search_func);
+    document.getElementById("search-button").addEventListener('click', search_func);
     document.getElementById("search-box").addEventListener('keypress', function (e) {
         if (e.keyCode === 13) {
             search_func();
