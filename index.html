@@ -1,0 +1,122 @@
+<html>
+    
+    <head>
+    
+        <link rel="stylesheet" href="node_modules/xel/stylesheets/material.theme.css">
+        <script src="node_modules/xel/xel.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono" rel="stylesheet">
+    
+    
+        <link rel="stylesheet" href="./main.css">
+    
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    
+    <body  OnLoad="document.getElementById('search-box').focus();">
+        <x-dialog id="no-barcode-popup">Please enter a barcode!</x-dialog>
+    
+            <x-box class="text-align-center" id="search-box-div">   
+            <span id="search-box-label"><strong>Enter Barcode: </strong></span>
+                    <x-input id="search-box">
+                        <x-icon name="search"></x-icon>
+                        <x-label>Enter Barcode</x-label>
+                      </x-input>
+            <x-button id="menu-button"  class="square-button">
+                    <x-icon name="settings"></x-icon>
+                  
+                    <x-popover id="setting-menu" style="--align: right;">
+                      <main id="settings-menu">
+                            <x-menu opened>
+                                    <x-menuitem id="openFileButton">
+                                            <x-label>Load Data</x-label>
+                                            <x-icon name="folder-open"></x-icon>
+                                    </x-menuitem>
+                                    <x-menuitem>
+                                            <x-label>Advanced</x-label>
+                                            <x-icon name="settings-ethernet"></x-icon>
+                                            <x-menu>
+                                                    <x-menuitem id="test-sample-code" value="Search using test barcode" onclick="test_func()">
+                                                            <x-label>Test current barcode data</x-label>
+
+                                                    </x-menuitem>
+                                                    <x-menuitem>
+                                                            <x-label>Export Barcodes data as...</x-label>
+                                                                <x-menu>
+                                                                    <x-menuitem>
+                                                                        <x-label>JSON</x-label>
+                                                                    </x-menuitem>
+                                                                    <x-menuitem>
+                                                                            <x-label>Tab-separated</x-label>
+                                                                        </x-menuitem>
+                                                                </x-menu>
+                                                    </x-menuitem>
+                                            </x-menu>
+                                    </x-menuitem>
+                                    <x-menuitem>
+                                            <x-label>Help</x-label>
+                                            <x-icon name="help"></x-icon>
+                                    </x-menuitem>
+                                    <x-menuitem>
+                                            <x-label>About</x-label>
+                                            <x-icon name="info-outline"></x-icon>
+                                    </x-menuitem>
+                            </x-menu>
+                      </main>
+                    </x-popover>
+                  </x-button>
+                  
+                  <x-dialog id="help-dialog">
+                    <main>
+                      <h3>Use Google's location service?</h3>
+                      <p>Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.</p>
+                    </main>
+                  
+                    <footer>
+                  
+                      <x-button id="agree-button" skin="flat" style="margin-left:auto; margin-right:auto;">
+                        <x-label>Agree</x-label>
+                      </x-button>
+                    </footer>
+                  </x-dialog>
+                  
+                  <x-button id="show-dialog-button" class="square-button" style="margin: 4px;">
+                    <x-icon name="help"></x-icon>
+                  </x-button>
+                  
+                </x-box> 
+    
+                <div id="results-box">
+                <x-card>
+                    <header>
+                     <x-box><h3>Stock #<div id="stock-result"></div></x-box></h3></x-box> 
+                    </header>
+                    <main>
+                     <ul>
+                             <x-box><li>Clone Name: <div id="clone-result"></div></li></x-box>
+                             <x-box><li>Box Name: <div id="box-result"></div></li></x-box></li>
+                             <x-box><li>Box Position: <div id="position-result"></div></li></x-box>
+                             <x-box><li>Barcode: <div id="barcode-result"></div></li></x-box>
+                     </ul>
+                     <span id="search-results"></span>
+                    </main>
+                  </x-card>
+            </div>
+    
+    
+    
+            <div id="sample-barcode" style="visibility: hidden;">0055122673</div>
+    </body>
+    <script type="text/javascript" src="./barcode-search.js"></script>
+    <script type="text/javascript" src="./load-barcodes.js"></script>
+    <script>
+        const remote = require('electron').remote;
+    
+
+            let showDialogButton = document.querySelector("#show-dialog-button");
+            let helpDialog = document.querySelector("#help-dialog");
+            let agreeButton = document.querySelector("#agree-button");
+            let disagreeButton = document.querySelector("#disagree-button");
+            showDialogButton.addEventListener("click", () => helpDialog.opened = true);
+            agreeButton.addEventListener("click", () => helpDialog.opened = false);
+          </script>
+    </html>

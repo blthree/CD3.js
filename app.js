@@ -7,5 +7,5 @@ electron.app.on('ready', function () {
     width: 800,
     height: 800
   });
-  mainWindow.loadURL('file://' + __dirname + '/barcode-search.html');
+  mainWindow.loadURL('file://' + __dirname + '/index.html');
 });
