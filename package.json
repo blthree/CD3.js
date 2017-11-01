@@ -1,0 +1,30 @@
+{
+  "name": "abrc-barcodes",
+  "version": "0.0.1",
+  "description": "Barcode Lookup for ABRC DNA Stocks",
+  "main": "app.js",
+  "dependencies": {
+    "electron-store": "^1.3.0",
+    "jshint": "^2.9.5",
+    "xel": "^0.0.65"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blthree/CD3.js.git"
+  },
+  "keywords": [
+    "matrixbox",
+    "barcodes",
+    "csv"
+  ],
+  "author": "Benson Lindsey",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/blthree/CD3.js/issues"
+  },
+  "homepage": "https://github.com/blthree/CD3.js#readme"
+}
