@@ -5,10 +5,11 @@
   "main": "app.js",
   "dependencies": {
     "electron-store": "^1.3.0",
-    "jshint": "^2.9.5",
     "xel": "^0.0.65"
   },
-  "devDependencies": {},
+  "devDependencies": {    
+    "jshint": "^2.9.5"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
