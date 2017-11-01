@@ -13,6 +13,81 @@
     </head>
     
     <body  OnLoad="document.getElementById('search-box').focus();">
+                <x-menubar>
+                                <x-menuitem>
+                                  <x-label>File</x-label>
+                              
+                                  <x-menu>
+                                    <x-menuitem>
+                                      <x-label>New</x-label>
+                                      <x-shortcut value="Control+N"></x-shortcut>
+                                    </x-menuitem>
+                              
+                                    <x-menuitem id="openFileButton">
+                                      <x-label>Load new barcodes…</x-label>
+                                      <x-icon name="folder-open"></x-icon>
+                                      <x-shortcut value="Control+O"></x-shortcut>
+                                    </x-menuitem>
+                              
+                                  
+                              
+                                    <x-menuitem>
+                                      <x-label>Export barcodes as…</x-label>
+                                      <x-shortcut value="Control+Shift+S"></x-shortcut>
+                                      <x-menu>
+                                                <x-menuitem>
+                                                    <x-label>JSON</x-label>
+                                                </x-menuitem>
+                                                <x-menuitem>
+                                                        <x-label>Tab-separated</x-label>
+                                                    </x-menuitem>
+                                            </x-menu>
+                                    </x-menuitem>
+                                    <hr>
+                                    <x-menuitem>
+                                                <x-label>Quit</x-label>
+                                                <x-shortcut value="Control+Q"></x-shortcut>
+                                              </x-menuitem>
+                                            </x-menu>
+                                          </x-menuitem>
+                                  </x-menu>
+                                </x-menuitem>
+                              
+                              
+                                <x-menuitem>
+                                  <x-label>View</x-label>
+                              
+                                  <x-menu>
+                                    <x-menuitem>
+                                      <x-label>Recent Searches</x-label>
+                                    </x-menuitem>
+                              
+                                    <x-menuitem>
+                                      <x-label>Info on current barcode data</x-label>
+                                    </x-menuitem>
+                                  </x-menu>
+                                </x-menuitem>
+                              
+                                <x-menuitem>
+                                  <x-label>Help</x-label>
+                              
+                                  <x-menu>
+                                    <x-menuitem>
+                                      <x-icon name="help"></x-icon>
+                                      <x-label>Usage Help</x-label>
+                                    </x-menuitem>
+                                    <x-menuitem>
+                                        <x-icon name="help"></x-icon>
+                                        <x-label>Instructions for updating barcode data</x-label>
+                                </x-menuitem>
+                                <x-menuitem>
+                                        <x-icon name="info"></x-icon>
+                                        <x-label>About</x-label>
+                                </x-menuitem>
+                                  </x-menu>
+                                </x-menuitem>
+                              </x-menubar>
+
         <x-dialog id="no-barcode-popup">Please enter a barcode!</x-dialog>
     
             <x-box class="text-align-center" id="search-box-div">   
