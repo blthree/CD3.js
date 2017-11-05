@@ -27,6 +27,22 @@
         document.getElementById('search-box').focus();
         }
     }
+
+    function getBarcodeInfo () {
+        // TODO: separate into 2 functions, first a wrapper function that opens the popup with
+        // loading spinners, than an async call to get barcode information that replaces spinner with
+        // barcode info once finished
+        var last_updated = store.get('updated');
+        console.log(last_updated);
+        var num_records = Object.keys(store.get('barcode_data')).length;
+        console.log(num_records);
+        document.querySelector("#barcode-info-popup").opened = true;
+        document.querySelector("#barcodes-count").textContent = num_records;
+        document.querySelector("#barcodes-last-updated").textContent = last_updated;
+        return {'last updated': last_updated,
+                    'number of barcodes': num_records}
+    }
+
     document.getElementById("search-box").addEventListener('click', search_func);
     document.getElementById("search-box").addEventListener('keypress', function (e) {
         if (e.keyCode === 13) {

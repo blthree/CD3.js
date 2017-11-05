@@ -62,7 +62,7 @@
                                       <x-label>Recent Searches</x-label>
                                     </x-menuitem>
                               
-                                    <x-menuitem>
+                                    <x-menuitem id="show-barcode-info">
                                       <x-label>Info on current barcode data</x-label>
                                     </x-menuitem>
                                   </x-menu>
@@ -72,7 +72,7 @@
                                   <x-label>Help</x-label>
                               
                                   <x-menu>
-                                    <x-menuitem>
+                                    <x-menuitem id="show-dialog-button">
                                       <x-icon name="help"></x-icon>
                                       <x-label>Usage Help</x-label>
                                     </x-menuitem>
@@ -155,9 +155,22 @@
                     </footer>
                   </x-dialog>
                   
-                  <x-button id="show-dialog-button" class="square-button" style="margin: 4px;">
-                    <x-icon name="help"></x-icon>
-                  </x-button>
+                  <!-- barcode information popup -->
+                  <x-dialog id="barcode-info-popup">
+                    <main>
+                      <h3>Current Barcode file:</h3>
+                      <p>Number of Barcodes: <span id="barcodes-count"></span></p>
+                      <p>Last Updated: <span id="barcodes-last-updated"></span></p>
+                    </main>
+                  
+                    <footer>
+                  
+                      <x-button id="OK-button" skin="flat" style="margin-left:auto; margin-right:auto;">
+                        <x-label>OK</x-label>
+                      </x-button>
+                    </footer>
+                  </x-dialog>
+
                   
                 </x-box> 
     
@@ -194,5 +207,11 @@
             let disagreeButton = document.querySelector("#disagree-button");
             showDialogButton.addEventListener("click", () => helpDialog.opened = true);
             agreeButton.addEventListener("click", () => helpDialog.opened = false);
+
+            let showBarcodeInfo = document.querySelector("#show-barcode-info");
+            let barcodeInfoPopup = document.querySelector("#barcode-info-popup");
+            let okButton = document.querySelector("#OK-button");
+            okButton.addEventListener("click", () => barcodeInfoPopup.opened = false);
+            showBarcodeInfo.addEventListener("click", getBarcodeInfo);
           </script>
     </html>
