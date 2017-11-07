@@ -57,4 +57,13 @@ function openFile() {
     });
 }
 
+function exportJSON(fileName, callback) {
+    var fs = require('fs');
+    fs.writeFile(fileName, JSON.stringify(store.get()), function (err) {
+        if (err) {
+            console.log(err);
+            return (callback(err));
+    }});
+}
+
 document.getElementById('openFileButton').addEventListener('click', openFile);
