@@ -1,235 +1,236 @@
 <html>
-    
-    <head>
-    
-        <link rel="stylesheet" href="node_modules/xel/stylesheets/material.theme.css">
-        <script src="node_modules/xel/xel.min.js"></script>
-        <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono" rel="stylesheet">
-    
-    
-        <link rel="stylesheet" href="./main.css">
-    
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    </head>
-    
-    <body  OnLoad="document.getElementById('search-box').focus();">
-                <x-menubar>
-                                <x-menuitem>
-                                  <x-label>File</x-label>
-                              
-                                  <x-menu>
-                                    <x-menuitem id="openFileButton">
-                                      <x-label>Load new barcodes…</x-label>
-                                      <x-icon name="folder-open"></x-icon>
-                                      <x-shortcut value="Control+O"></x-shortcut>
-                                    </x-menuitem>
-                              
-                                    <x-menuitem>
-                                      <x-label>Export barcodes as…</x-label>
-                                      <x-shortcut value="Control+Shift+S"></x-shortcut>
-                                      <x-menu>
-                                                <x-menuitem>
-                                                    <x-label>JSON</x-label>
-                                                </x-menuitem>
-                                                <x-menuitem>
-                                                        <x-label>Tab-separated</x-label>
-                                                    </x-menuitem>
-                                        </x-menu>
-                                    </x-menuitem>
-                                    <hr>
-                                    <x-menuitem onclick="window.close()">
-                                                <x-label>Quit</x-label>
-                                                <x-shortcut value="Control+Q"></x-shortcut>
-                                              </x-menuitem>
-                                            </x-menu>
-                                          </x-menuitem>
-                                  </x-menu>
-                                </x-menuitem>
 
-                                <x-menuitem>
-                                  <x-label>View</x-label>
-                              
-                                  <x-menu>
-                                    <x-menuitem>
-                                      <x-label>Recent Searches</x-label>
-                                    </x-menuitem>
-                              
-                                    <x-menuitem id="show-barcode-info">
-                                      <x-label>Info on current barcode data</x-label>
-                                    </x-menuitem>
-                                  </x-menu>
-                                </x-menuitem>
-                              
-                                <x-menuitem>
-                                  <x-label>Help</x-label>
-                              
-                                  <x-menu>
-                                    <x-menuitem id="show-dialog-button">
-                                      <x-icon name="help"></x-icon>
-                                      <x-label>Usage Help</x-label>
-                                    </x-menuitem>
-                                    <x-menuitem id="show-barcode-help-button">
-                                        <x-icon name="help"></x-icon>
-                                        <x-label>Instructions for updating barcode data</x-label>
-                                </x-menuitem>
-                                <x-menuitem>
-                                        <x-icon name="info"></x-icon>
-                                        <x-label>About</x-label>
-                                </x-menuitem>
-                                  </x-menu>
-                                </x-menuitem>
-                              </x-menubar>
+<head>
 
-        <x-dialog id="no-barcode-popup">Please enter a barcode!</x-dialog>
-    
-            <x-box class="text-align-center" id="search-box-div">   
-            <span id="search-box-label"><strong>Enter Barcode: </strong></span>
-                    <x-input id="search-box">
-                        <x-icon name="search"></x-icon>
-                        <x-label>Enter Barcode</x-label>
-                      </x-input>
-            <x-button id="menu-button"  class="square-button">
-                    <x-icon name="settings"></x-icon>
-                  
-                    <x-popover id="setting-menu" style="--align: right;">
-                      <main id="settings-menu">
-                            <x-menu opened>
-                                    <x-menuitem id="openFileButton">
-                                            <x-label>Load Data</x-label>
-                                            <x-icon name="folder-open"></x-icon>
-                                    </x-menuitem>
-                                    <x-menuitem>
-                                            <x-label>Advanced</x-label>
-                                            <x-icon name="settings-ethernet"></x-icon>
-                                            <x-menu>
-                                                    <x-menuitem id="test-sample-code" value="Search using test barcode" onclick="test_func()">
-                                                            <x-label>Test current barcode data</x-label>
+  <link rel="stylesheet" href="node_modules/xel/stylesheets/material.theme.css">
+  <script src="node_modules/xel/xel.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono" rel="stylesheet">
 
-                                                    </x-menuitem>
-                                                    <x-menuitem>
-                                                            <x-label>Export Barcodes data as...</x-label>
-                                                                <x-menu>
-                                                                    <x-menuitem>
-                                                                        <x-label>JSON</x-label>
-                                                                    </x-menuitem>
-                                                                    <x-menuitem>
-                                                                            <x-label>Tab-separated</x-label>
-                                                                        </x-menuitem>
-                                                                </x-menu>
-                                                    </x-menuitem>
-                                            </x-menu>
-                                    </x-menuitem>
-                                    <x-menuitem>
-                                            <x-label>Help</x-label>
-                                            <x-icon name="help"></x-icon>
-                                    </x-menuitem>
-                                    <x-menuitem>
-                                            <x-label>About</x-label>
-                                            <x-icon name="info-outline"></x-icon>
-                                    </x-menuitem>
-                            </x-menu>
-                      </main>
-                    </x-popover>
-                  </x-button>
-                  <!-- usage instruction popup -->
-                  <x-dialog id="help-dialog">
-                    <main>
-                      <h3>Instructions:</h3>
-                      <p>Just scan a barcode into the text box to look up the Stock number and other information</p>
-                      <p>To load a new Box position data file, click the settings button and choose "Load new file"</p>
-                    </main>
-                  
-                    <footer>
-                  
-                      <x-button id="agree-button" skin="flat" style="margin-left:auto; margin-right:auto;">
-                        <x-label>OK</x-label>
-                      </x-button>
-                    </footer>
-                  </x-dialog>
-                  <!-- barcode updating instruction popup -->
-                  <x-dialog id="barcode-help-popup">
-                    <main>
-                      <h3>Instructions:</h3>
-                      <p>Export the following fields from the FileMaker Barcode file:</p>
-                      <ul>
-                        <li>Stock name</li>
-                        <li>Clone name</li>
-                        <li>box name</li>
-                        <li>position</li>
-                        <li>barcode</li>
-                      </ul>
-                    </main>
-                  
-                    <footer>
-                  
-                      <x-button id="close-barcode-help-button" skin="flat" style="margin-left:auto; margin-right:auto;">
-                        <x-label>OK</x-label>
-                      </x-button>
-                    </footer>
-                  </x-dialog>
-                  
-                  <!-- barcode information popup -->
-                  <x-dialog id="barcode-info-popup">
-                    <main>
-                      <h3>Current Barcode file:</h3>
-                      <p>Number of Barcodes: <span id="barcodes-count"></span></p>
-                      <p>Last Updated: <span id="barcodes-last-updated"></span></p>
-                    </main>
-                  
-                    <footer>
-                  
-                      <x-button id="OK-button" skin="flat" style="margin-left:auto; margin-right:auto;">
-                        <x-label>OK</x-label>
-                      </x-button>
-                    </footer>
-                  </x-dialog>
 
-                  
-                </x-box> 
-    
-                <div id="results-box">
-                <x-card>
-                    <header>
-                     <x-box id="card-header">Stock #<div id="stock-result"></div></x-box>
-                    </header>
-                    <main>
-                     
-                             <x-box>Clone Name: <div id="clone-result"></div></x-box>
-                             <x-box>Box Name: <div id="box-result"></div></x-box>
-                             <x-box>Box Position: <div id="position-result"></div></x-box>
-                             <x-box>Barcode: <div id="barcode-result"></div></x-box>
+  <link rel="stylesheet" href="./main.css">
 
-                     <span id="search-results"></span>
-                    </main>
-                  </x-card>
-            </div>
-    
-    
-    
-            <div id="sample-barcode" style="visibility: hidden;">0055122673</div>
-    </body>
-    <script type="text/javascript" src="./barcode-search.js"></script>
-    <script type="text/javascript" src="./load-barcodes.js"></script>
-    <script>
-        const remote = require('electron').remote;
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
 
-            let showDialogButton = document.querySelector("#show-dialog-button");
-            let helpDialog = document.querySelector("#help-dialog");
-            let agreeButton = document.querySelector("#agree-button");
-            let disagreeButton = document.querySelector("#disagree-button");
-            showDialogButton.addEventListener("click", () => helpDialog.opened = true);
-            agreeButton.addEventListener("click", () => helpDialog.opened = false);
+<body OnLoad="document.getElementById('search-box').focus();">
+  <x-menubar>
+    <x-menuitem>
+      <x-label>File</x-label>
 
-            let showBarcodeInfo = document.querySelector("#show-barcode-info");
-            let barcodeInfoPopup = document.querySelector("#barcode-info-popup");
-            let loadBarcodeHelpPopup = document.querySelector("#show-barcode-help-button");
-            let barcodeHelpPopup = document.querySelector("#barcode-help-popup");
-            let closeBarcodeHelpButton = document.querySelector("#close-barcode-help-button");
-            closeBarcodeHelpButton.addEventListener("click", () => barcodeHelpPopup.opened = false);
-            loadBarcodeHelpPopup.addEventListener("click", () => barcodeHelpPopup.opened = true);
-            let okButton = document.querySelector("#OK-button");
-            okButton.addEventListener("click", () => barcodeInfoPopup.opened = false);
-            showBarcodeInfo.addEventListener("click", getBarcodeInfo);
-          </script>
-    </html>
+      <x-menu>
+        <x-menuitem id="openFileButton">
+          <x-label>Load new barcodes…</x-label>
+          <x-icon name="folder-open"></x-icon>
+          <x-shortcut value="Control+O"></x-shortcut>
+        </x-menuitem>
+
+        <x-menuitem>
+          <x-label>Export barcodes as…</x-label>
+          <x-shortcut value="Control+Shift+S"></x-shortcut>
+          <x-menu>
+            <x-menuitem>
+              <x-label>JSON</x-label>
+            </x-menuitem>
+            <x-menuitem>
+              <x-label>Tab-separated</x-label>
+            </x-menuitem>
+          </x-menu>
+        </x-menuitem>
+        <hr>
+        <x-menuitem onclick="window.close()">
+          <x-label>Quit</x-label>
+          <x-shortcut value="Control+Q"></x-shortcut>
+        </x-menuitem>
+      </x-menu>
+    </x-menuitem>
+    </x-menu>
+    </x-menuitem>
+
+    <x-menuitem>
+      <x-label>View</x-label>
+
+      <x-menu>
+        <x-menuitem>
+          <x-label>Recent Searches</x-label>
+        </x-menuitem>
+
+        <x-menuitem id="show-barcode-info">
+          <x-label>Info on current barcode data</x-label>
+        </x-menuitem>
+      </x-menu>
+    </x-menuitem>
+
+    <x-menuitem>
+      <x-label>Help</x-label>
+
+      <x-menu>
+        <x-menuitem id="show-dialog-button">
+          <x-icon name="help"></x-icon>
+          <x-label>Usage Help</x-label>
+        </x-menuitem>
+        <x-menuitem id="show-barcode-help-button">
+          <x-icon name="help"></x-icon>
+          <x-label>Instructions for updating barcode data</x-label>
+        </x-menuitem>
+        <x-menuitem id="about-menu-item">
+          <x-icon name="about-menu-item"></x-icon>
+          <x-label>About</x-label>
+        </x-menuitem>
+      </x-menu>
+    </x-menuitem>
+  </x-menubar>
+
+  <x-dialog id="no-barcode-popup">Please enter a barcode!</x-dialog>
+
+  <x-box class="text-align-center" id="search-box-div">
+    <span id="search-box-label">
+      <strong>Enter Barcode: </strong>
+    </span>
+    <x-input id="search-box">
+      <x-icon name="search"></x-icon>
+      <x-label>Enter Barcode</x-label>
+    </x-input>
+
+
+    <!-- usage instruction popup -->
+    <x-dialog id="help-dialog">
+      <main>
+        <h3>Instructions:</h3>
+        <p>Just scan a barcode into the text box to look up the Stock number and other information</p>
+        <p>To load a new Box position data file, click the settings button and choose "Load new file"</p>
+      </main>
+      <footer>
+        <x-button id="agree-button" skin="flat" style="margin-left:auto; margin-right:auto;">
+          <x-label>OK</x-label>
+        </x-button>
+      </footer>
+    </x-dialog>
+
+    <!-- about popup -->
+    <x-dialog id="about-dialog">
+      <main>
+        <h2>CD3.js </h2>
+        <h3>ABRC Barcode Scanning App</h3>
+        <p style="margin-bottom:20px;">Created 2017 by Benson Lindsey
+          <a href=github.com/blthree>github.com/blthree</a>
+        </p>
+      </main>
+      <footer>
+        <x-button id="about-dialog-ok-button" skin="flat" style="margin-left:auto; margin-right:auto;">
+          <x-label>OK</x-label>
+        </x-button>
+      </footer>
+    </x-dialog>
+
+    <!-- barcode updating instruction popup -->
+    <x-dialog id="barcode-help-popup">
+      <main>
+        <h3>Instructions:</h3>
+        <p>Export the following fields from the FileMaker Barcode file:</p>
+        <ul>
+          <li>Stock name</li>
+          <li>Clone name</li>
+          <li>box name</li>
+          <li>position</li>
+          <li>barcode</li>
+        </ul>
+      </main>
+
+      <footer>
+
+        <x-button id="close-barcode-help-button" skin="flat" style="margin-left:auto; margin-right:auto;">
+          <x-label>OK</x-label>
+        </x-button>
+      </footer>
+    </x-dialog>
+
+    <!-- barcode information popup -->
+    <x-dialog id="barcode-info-popup">
+      <main>
+        <h3>Current Barcode file:</h3>
+        <p>Number of Barcodes:
+          <span id="barcodes-count"></span>
+        </p>
+        <p>Last Updated:
+          <span id="barcodes-last-updated"></span>
+        </p>
+      </main>
+      <footer>
+        <x-button id="OK-button" skin="flat" style="margin-left:auto; margin-right:auto;">
+          <x-label>OK</x-label>
+        </x-button>
+      </footer>
+    </x-dialog>
+
+
+  </x-box>
+
+  <div id="results-box">
+    <x-card>
+      <header>
+        <x-box id="card-header">Stock #
+          <div id="stock-result"></div>
+        </x-box>
+      </header>
+      <main>
+
+        <x-box>Clone Name:
+          <div id="clone-result"></div>
+        </x-box>
+        <x-box>Box Name:
+          <div id="box-result"></div>
+        </x-box>
+        <x-box>Box Position:
+          <div id="position-result"></div>
+        </x-box>
+        <x-box>Barcode:
+          <div id="barcode-result"></div>
+        </x-box>
+
+        <span id="search-results"></span>
+      </main>
+    </x-card>
+  </div>
+
+
+
+  <div id="sample-barcode" style="visibility: hidden;">0055122673</div>
+</body>
+<script type="text/javascript" src="./barcode-search.js"></script>
+<script type="text/javascript" src="./load-barcodes.js"></script>
+<script>
+  const remote = require('electron').remote;
+
+
+  let showDialogButton = document.querySelector("#show-dialog-button");
+  let helpDialog = document.querySelector("#help-dialog");
+  let agreeButton = document.querySelector("#agree-button");
+  showDialogButton.addEventListener("click", () => helpDialog.opened = true);
+  agreeButton.addEventListener("click", () => helpDialog.opened = false);
+
+  let aboutDialog = document.querySelector("#about-dialog");
+  let aboutDialogOKButton = document.querySelector("#about-dialog-ok-button");
+  let aboutMenuItem = document.querySelector("#about-menu-item");
+
+
+  let disagreeButton = document.querySelector("#disagree-button");
+
+  aboutMenuItem.addEventListener("click", () => aboutDialog.opened = true);
+  aboutDialogOKButton.addEventListener("click", () => aboutDialog.opened = false);
+
+
+  let showBarcodeInfo = document.querySelector("#show-barcode-info");
+  let barcodeInfoPopup = document.querySelector("#barcode-info-popup");
+  let loadBarcodeHelpPopup = document.querySelector("#show-barcode-help-button");
+  let barcodeHelpPopup = document.querySelector("#barcode-help-popup");
+  let closeBarcodeHelpButton = document.querySelector("#close-barcode-help-button");
+
+  closeBarcodeHelpButton.addEventListener("click", () => barcodeHelpPopup.opened = false);
+  loadBarcodeHelpPopup.addEventListener("click", () => barcodeHelpPopup.opened = true);
+
+  let okButton = document.querySelector("#OK-button");
+  okButton.addEventListener("click", () => barcodeInfoPopup.opened = false);
+  showBarcodeInfo.addEventListener("click", getBarcodeInfo);
+</script>
+
+</html>
