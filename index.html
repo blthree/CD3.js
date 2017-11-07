@@ -18,18 +18,11 @@
                                   <x-label>File</x-label>
                               
                                   <x-menu>
-                                    <x-menuitem>
-                                      <x-label>New</x-label>
-                                      <x-shortcut value="Control+N"></x-shortcut>
-                                    </x-menuitem>
-                              
                                     <x-menuitem id="openFileButton">
                                       <x-label>Load new barcodes…</x-label>
                                       <x-icon name="folder-open"></x-icon>
                                       <x-shortcut value="Control+O"></x-shortcut>
                                     </x-menuitem>
-                              
-                                  
                               
                                     <x-menuitem>
                                       <x-label>Export barcodes as…</x-label>
@@ -41,10 +34,10 @@
                                                 <x-menuitem>
                                                         <x-label>Tab-separated</x-label>
                                                     </x-menuitem>
-                                            </x-menu>
+                                        </x-menu>
                                     </x-menuitem>
                                     <hr>
-                                    <x-menuitem>
+                                    <x-menuitem onclick="window.close()">
                                                 <x-label>Quit</x-label>
                                                 <x-shortcut value="Control+Q"></x-shortcut>
                                               </x-menuitem>
@@ -52,8 +45,7 @@
                                           </x-menuitem>
                                   </x-menu>
                                 </x-menuitem>
-                              
-                              
+
                                 <x-menuitem>
                                   <x-label>View</x-label>
                               
@@ -76,7 +68,7 @@
                                       <x-icon name="help"></x-icon>
                                       <x-label>Usage Help</x-label>
                                     </x-menuitem>
-                                    <x-menuitem>
+                                    <x-menuitem id="show-barcode-help-button">
                                         <x-icon name="help"></x-icon>
                                         <x-label>Instructions for updating barcode data</x-label>
                                 </x-menuitem>
@@ -139,7 +131,7 @@
                       </main>
                     </x-popover>
                   </x-button>
-                  
+                  <!-- usage instruction popup -->
                   <x-dialog id="help-dialog">
                     <main>
                       <h3>Instructions:</h3>
@@ -150,6 +142,27 @@
                     <footer>
                   
                       <x-button id="agree-button" skin="flat" style="margin-left:auto; margin-right:auto;">
+                        <x-label>OK</x-label>
+                      </x-button>
+                    </footer>
+                  </x-dialog>
+                  <!-- barcode updating instruction popup -->
+                  <x-dialog id="barcode-help-popup">
+                    <main>
+                      <h3>Instructions:</h3>
+                      <p>Export the following fields from the FileMaker Barcode file:</p>
+                      <ul>
+                        <li>Stock name</li>
+                        <li>Clone name</li>
+                        <li>box name</li>
+                        <li>position</li>
+                        <li>barcode</li>
+                      </ul>
+                    </main>
+                  
+                    <footer>
+                  
+                      <x-button id="close-barcode-help-button" skin="flat" style="margin-left:auto; margin-right:auto;">
                         <x-label>OK</x-label>
                       </x-button>
                     </footer>
@@ -210,6 +223,11 @@
 
             let showBarcodeInfo = document.querySelector("#show-barcode-info");
             let barcodeInfoPopup = document.querySelector("#barcode-info-popup");
+            let loadBarcodeHelpPopup = document.querySelector("#show-barcode-help-button");
+            let barcodeHelpPopup = document.querySelector("#barcode-help-popup");
+            let closeBarcodeHelpButton = document.querySelector("#close-barcode-help-button");
+            closeBarcodeHelpButton.addEventListener("click", () => barcodeHelpPopup.opened = false);
+            loadBarcodeHelpPopup.addEventListener("click", () => barcodeHelpPopup.opened = true);
             let okButton = document.querySelector("#OK-button");
             okButton.addEventListener("click", () => barcodeInfoPopup.opened = false);
             showBarcodeInfo.addEventListener("click", getBarcodeInfo);
