@@ -28,7 +28,7 @@
           <x-label>Export barcodes as…</x-label>
           <x-shortcut value="Control+Shift+S"></x-shortcut>
           <x-menu>
-            <x-menuitem>
+            <x-menuitem id="export-barcodes-json">
               <x-label>JSON</x-label>
             </x-menuitem>
             <x-menuitem>
@@ -193,7 +193,7 @@
   </div>
 
 
-  <x-progressbar id=#waiting-progress-bar style="visibility: hidden;"></x-progressbar>
+  <x-progressbar id="waiting-progress-bar" style="visibility: hidden;"></x-progressbar>
   <div id="sample-barcode" style="visibility: hidden;">0055122673</div>
 </body>
 <script type="text/javascript" src="./barcode-search.js"></script>

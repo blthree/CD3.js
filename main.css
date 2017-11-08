@@ -76,3 +76,9 @@ padding: 0px;
 #stock-result {
     padding: 6px;
 }
+#waiting-progress-bar {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    bottom: 50;
+}

@@ -57,13 +57,23 @@ function openFile() {
     });
 }
 
-function exportJSON(fileName, callback) {
+function exportJSON() {
     var fs = require('fs');
-    fs.writeFile(fileName, JSON.stringify(store.get()), function (err) {
-        if (err) {
-            console.log(err);
-            return (callback(err));
-    }});
+    var loadBar = document.querySelector("#waiting-progress-bar");
+    fileName = dialog.showSaveDialog()
+    
+    if (fileName) {
+        loadBar.style.visibility = "visible";
+        fs.writeFile(fileName, JSON.stringify(store.get()), function (err) {
+            if (err) {
+                console.log(err);
+                return (callback(err));
+            }
+            loadBar.style.visibility = "hidden";
+    });
+    }
+
 }
 
 document.getElementById('openFileButton').addEventListener('click', openFile);
+document.querySelector("#export-barcodes-json").addEventListener('click', exportJSON);
