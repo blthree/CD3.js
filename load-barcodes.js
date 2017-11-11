@@ -26,7 +26,7 @@ function loadtsv(fileName, callback) {
         callback(null, json_data);
     });
 
-};
+}
 
 function openFile() {
     dialog.showOpenDialog({
@@ -37,21 +37,21 @@ function openFile() {
     }, function (fileNames, err) {
         if (fileNames === undefined) return;
         var fileName = fileNames[0];
-        store.set('fileName2', fileName)
+        store.set('fileName2', fileName);
         // save the date and time the electron-stre was last updated
-        date = new Date()
-        store.set('updated', date.toGMTString())
-        console.log(store.get('fileName2'))
+        date = new Date();
+        store.set('updated', date.toGMTString());
+        console.log(store.get('fileName2'));
         // load and parse data from file, than store using electron-store
         loadtsv(store.get('fileName2'), function (err, data) {
             if (err) {
-                console.log(err)
-            };
+                console.log(err);
+            }
             // clear current data
-            store.set('barcode_data', {})
+            store.set('barcode_data', {});
             // save the new data
-            store.set('barcode_data', data)
-        })
+            store.set('barcode_data', data);
+        });
         // reset cursor focus to search box
         document.getElementById('search-box').focus();
     });
@@ -60,8 +60,8 @@ function openFile() {
 function exportJSON() {
     var fs = require('fs');
     var loadBar = document.querySelector("#waiting-progress-bar");
-    fileName = dialog.showSaveDialog()
-    
+    fileName = dialog.showSaveDialog();
+
     if (fileName) {
         loadBar.style.visibility = "visible";
         fs.writeFile(fileName, JSON.stringify(store.get()), function (err) {
@@ -70,7 +70,7 @@ function exportJSON() {
                 return (callback(err));
             }
             loadBar.style.visibility = "hidden";
-    });
+        });
     }
 
 }
