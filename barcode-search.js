@@ -34,26 +34,17 @@
         if (!results) {
             results = defaultBarcode;
         }
-            // document.getElementById('search-results').textContent = JSON.stringify(results);
-            // document.getElementById('stock-result').textContent = JSON.stringify(results.StockNum).replace(/\"/g, '');
-            // document.getElementById('clone-result').textContent = JSON.stringify(results.CloneName).replace(/\"/g, '');
-            // document.getElementById('box-result').textContent = JSON.stringify(results.Box).replace(/\"/g, '');
-            // document.getElementById('position-result').textContent = JSON.stringify(results.Position).replace(/\"/g, '');
-            // document.getElementById('barcode-result').textContent = JSON.stringify(searchCode).replace(/\"/g, '');
             for (var key in results) {
                 if (results.hasOwnProperty(key)) {
-                
                     console.log(key, results[key]);
                     appResults[key] = results[key];
                 }
                 
             }
             
-            
-            appResults.data = results;
         document.getElementById('search-box').value = "";
         document.getElementById('search-box').focus();
-
+        // save search results to history
         searchHistory.push(results);
         }
     }
