@@ -2,7 +2,19 @@
     var dialog = app.dialog;
     var session = app.session;
 
-    var defaultBarcode = {"StockNum":"Not Found","CloneName":"Not Found","Box":"Not Found","Position":"Not Found"};
+    var defaultBarcode = {"stockNum":"Not Found","cloneName":"Not Found","box":"Not Found","position":"Not Found"};
+    var results = 'Hello Vue!';
+
+    var appResults = new Vue({
+        el: '#results-box',
+        data: {
+          stockNum: 'Hello Vue!',
+          cloneName: '',
+          box: '',
+          position: '',
+          searchCode: ''
+        }
+      });
 
     function test_func() {
         document.querySelector("#search-box").value = document.getElementById("sample-barcode").textContent; //"0055122673" 
@@ -22,12 +34,23 @@
         if (!results) {
             results = defaultBarcode;
         }
-            document.getElementById('search-results').textContent = JSON.stringify(results);
-            document.getElementById('stock-result').textContent = JSON.stringify(results.StockNum).replace(/\"/g, '');
-            document.getElementById('clone-result').textContent = JSON.stringify(results.CloneName).replace(/\"/g, '');
-            document.getElementById('box-result').textContent = JSON.stringify(results.Box).replace(/\"/g, '');
-            document.getElementById('position-result').textContent = JSON.stringify(results.Position).replace(/\"/g, '');
-            document.getElementById('barcode-result').textContent = JSON.stringify(searchCode).replace(/\"/g, '');
+            // document.getElementById('search-results').textContent = JSON.stringify(results);
+            // document.getElementById('stock-result').textContent = JSON.stringify(results.StockNum).replace(/\"/g, '');
+            // document.getElementById('clone-result').textContent = JSON.stringify(results.CloneName).replace(/\"/g, '');
+            // document.getElementById('box-result').textContent = JSON.stringify(results.Box).replace(/\"/g, '');
+            // document.getElementById('position-result').textContent = JSON.stringify(results.Position).replace(/\"/g, '');
+            // document.getElementById('barcode-result').textContent = JSON.stringify(searchCode).replace(/\"/g, '');
+            for (var key in results) {
+                if (results.hasOwnProperty(key)) {
+                
+                    console.log(key, results[key]);
+                    appResults[key] = results[key];
+                }
+                
+            }
+            
+            
+            appResults.data = results;
         document.getElementById('search-box').value = "";
         document.getElementById('search-box').focus();
 

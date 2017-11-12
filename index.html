@@ -5,6 +5,7 @@
   <link rel="stylesheet" href="node_modules/xel/stylesheets/material.theme.css">
   <script src="node_modules/xel/xel.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono" rel="stylesheet">
+  <script src="https://unpkg.com/vue"></script>
 
 
   <link rel="stylesheet" href="./main.css">
@@ -173,22 +174,22 @@
     <x-card>
       <header>
         <x-box id="card-header">Stock #
-          <div id="stock-result"></div>
+          <div id="stock-result">{{stockNum}}</div>
         </x-box>
       </header>
       <main>
 
         <x-box>Clone Name: 
-          <div id="clone-result"></div>
+          <div id="clone-result">{{cloneName}}</div>
         </x-box>
         <x-box>Box Name: 
-          <div id="box-result"></div>
+          <div id="box-result">{{box}}</div>
         </x-box>
         <x-box>Box Position: 
-          <div id="position-result"></div>
+          <div id="position-result">{{position}}</div>
         </x-box>
         <x-box>Barcode: 
-          <div id="barcode-result"></div>
+          <div id="barcode-result">{{searchCode}}</div>
         </x-box>
 
         <span id="search-results"></span>
