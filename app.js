@@ -8,4 +8,5 @@ electron.app.on('ready', function () {
     height: 800
   });
   mainWindow.loadURL('file://' + __dirname + '/index.html');
+
 });

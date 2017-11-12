@@ -72,6 +72,10 @@
           <x-icon name="help"></x-icon>
           <x-label>Instructions for updating barcode data</x-label>
         </x-menuitem>
+        <x-menuitem id="test-barcodes">
+          <x-icon name="help"></x-icon>
+          <x-label>Test using sample barcode</x-label>
+        </x-menuitem>
         <x-menuitem id="about-menu-item">
           <x-icon name="about-menu-item"></x-icon>
           <x-label>About</x-label>
@@ -174,16 +178,16 @@
       </header>
       <main>
 
-        <x-box>Clone Name:
+        <x-box>Clone Name: 
           <div id="clone-result"></div>
         </x-box>
-        <x-box>Box Name:
+        <x-box>Box Name: 
           <div id="box-result"></div>
         </x-box>
-        <x-box>Box Position:
+        <x-box>Box Position: 
           <div id="position-result"></div>
         </x-box>
-        <x-box>Barcode:
+        <x-box>Barcode: 
           <div id="barcode-result"></div>
         </x-box>
 
@@ -200,7 +204,7 @@
 <script type="text/javascript" src="./load-barcodes.js"></script>
 <script>
   const remote = require('electron').remote;
-
+  var searchHistory = [];
 
   let showDialogButton = document.querySelector("#show-dialog-button");
   let helpDialog = document.querySelector("#help-dialog");
