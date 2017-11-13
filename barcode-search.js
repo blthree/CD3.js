@@ -2,7 +2,14 @@
     var dialog = app.dialog;
     var session = app.session;
 
+    var resultsToDomMap = { "StockNum" : "stock-result", 
+                            "CloneName": "clone-result", "Box": "box-result", 
+                            "Position": "position-result", "searchCode": "barcode-result" };
     var defaultBarcode = {"StockNum":"Not Found","CloneName":"Not Found","Box":"Not Found","Position":"Not Found"};
+
+    function editString(domElement, jsonObj) {
+        document.getElementById(domElement).textContent = JSON.stringify(jsonObj).replace(/\"/g, '');
+    }
 
     function test_func() {
         document.querySelector("#search-box").value = document.getElementById("sample-barcode").textContent; //"0055122673" 
@@ -10,10 +17,10 @@
         search_func();
     }
 
+    // TODO: generalize to search_func(searchCode) 
     function search_func() {
         var searchCode = document.querySelector("#search-box").value;
-        console.log(searchCode);
-        if (searchCode == "") {
+        if (searchCode === "") {
             let dialog2 = document.querySelector("x-dialog");
             dialog2.opened = true;
         } else {
@@ -22,15 +29,15 @@
         if (!results) {
             results = defaultBarcode;
         }
+            // keeping this for debugging for now
             document.getElementById('search-results').textContent = JSON.stringify(results);
-            document.getElementById('stock-result').textContent = JSON.stringify(results.StockNum).replace(/\"/g, '');
-            document.getElementById('clone-result').textContent = JSON.stringify(results.CloneName).replace(/\"/g, '');
-            document.getElementById('box-result').textContent = JSON.stringify(results.Box).replace(/\"/g, '');
-            document.getElementById('position-result').textContent = JSON.stringify(results.Position).replace(/\"/g, '');
-            document.getElementById('barcode-result').textContent = JSON.stringify(searchCode).replace(/\"/g, '');
+            for (var key in results) {
+                editString(resultsToDomMap[key], results[key]);
+            }
+        // reset focus to search box
         document.getElementById('search-box').value = "";
         document.getElementById('search-box').focus();
-
+        // save results to search history
         searchHistory.push(results);
         }
     }
@@ -47,7 +54,6 @@
                     'number of barcodes': num_records}
     }
 
-    document.getElementById("search-box").addEventListener('click', search_func);
     document.getElementById("search-box").addEventListener('keypress', function (e) {
         if (e.keyCode === 13) {
             search_func();
