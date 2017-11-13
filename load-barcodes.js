@@ -38,7 +38,7 @@ function openFile() {
         if (fileNames === undefined) return;
         var fileName = fileNames[0];
         store.set('fileName2', fileName);
-        // save the date and time the electron-stre was last updated
+        // save the date and time the electron-store was last updated
         date = new Date();
         store.set('updated', date.toGMTString());
         console.log(store.get('fileName2'));
@@ -72,7 +72,6 @@ function exportJSON() {
             loadBar.style.visibility = "hidden";
         });
     }
-
 }
 
 document.getElementById('openFileButton').addEventListener('click', openFile);
