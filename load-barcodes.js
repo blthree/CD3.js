@@ -8,10 +8,8 @@ const store = new Store();
 function loadtsv(fileName, callback) {
     var fs = require('fs');
     data = fs.readFile(fileName, function (err, data) {
-        // catch err and pass upwardss
         if (err) {
             console.log(err);
-            alert("Error while loading barcode file:\n " + err)
             return (callback(err));
         }
         data = data.toString().replace(/\r/g, '').split('\n');
@@ -34,7 +32,7 @@ function openFile() {
     dialog.showOpenDialog({
         filters: [{
             name: 'text',
-            extensions: ['tab', 'tsv']
+            extensions: ['tab']
         }]
     }, function (fileNames, err) {
         if (fileNames === undefined) return;
