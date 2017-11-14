@@ -19,10 +19,10 @@ function loadtsv(fileName, callback) {
         for (i = 0; i < data.length; i++) {
             line = data[i].split("\t");
             json_data[line[0]] = {
-                "StockNum": line[1],
-                "CloneName": line[2],
-                "Box": line[3],
-                "Position": line[4]
+                "stockNum": line[1],
+                "cloneName": line[2],
+                "box": line[3],
+                "position": line[4]
             };
         }
         callback(null, json_data);
@@ -40,7 +40,7 @@ function openFile() {
         if (fileNames === undefined) return;
         var fileName = fileNames[0];
         store.set('fileName2', fileName);
-        // save the date and time the electron-stre was last updated
+        // save the date and time the electron-store was last updated
         date = new Date();
         store.set('updated', date.toGMTString());
         console.log(store.get('fileName2'));
@@ -74,7 +74,6 @@ function exportJSON() {
             loadBar.style.visibility = "hidden";
         });
     }
-
 }
 
 document.getElementById('openFileButton').addEventListener('click', openFile);

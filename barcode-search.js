@@ -2,21 +2,26 @@
     var dialog = app.dialog;
     var session = app.session;
 
-    var resultsToDomMap = { "StockNum" : "stock-result", 
-                            "CloneName": "clone-result", "Box": "box-result", 
-                            "Position": "position-result", "searchCode": "barcode-result" };
+
     var defaultBarcode = {"StockNum":"Not Found","CloneName":"Not Found","Box":"Not Found","Position":"Not Found"};
+
+    var appResults = new Vue({
+        el: '#results-box',
+        data: {
+          stockNum: 'Hello Vue!',
+          cloneName: '',
+          box: '',
+          position: '',
+          searchCode: ''
+        }
+      });
+
 
     // search box element
     let searchBox = document.getElementById("search-box");
 
-    function editString(domElement, jsonObj) {
-        document.getElementById(domElement).textContent = JSON.stringify(jsonObj).replace(/\"/g, '');
-    }
-
     function test_func() {
-        searchBox.value = "0055122673";
-        
+        searchBox.value = "0055122673"
         search_func();
     }
 
@@ -32,15 +37,18 @@
         if (!results) {
             results = defaultBarcode;
         }
-        // convert to text, clean up, and update DOM elements 
-        // interating through DOM mappings and results by key 
+
         for (var key in results) {
-            editString(resultsToDomMap[key], results[key]);
+            if (results.hasOwnProperty(key)) {
+                console.log(key, results[key]);
+                appResults[key] = jsonObj[key];
+            }
+
         }
-        // reset focus to search box
-        searchBox.value = "";
-        searchBox.focus();
-        // save results to search history
+        // reset focus to search box 
+        document.getElementById('search-box').value = "";
+        document.getElementById('search-box').focus();
+        // save search results to history
         searchHistory.push(results);
         }
     }
