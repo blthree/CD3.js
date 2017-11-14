@@ -2,3 +2,5 @@
 /node_modules
 exports/barcode-data.json
 builds
+exports
+barcode_data.tab
