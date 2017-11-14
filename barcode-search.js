@@ -14,10 +14,8 @@
         document.getElementById(domElement).textContent = JSON.stringify(jsonObj).replace(/\"/g, '');
     }
 
-    function test_func() {
-        searchBox.value = "0055122673";
-        
-        search_func();
+    function testWithSampleBarcode() {
+        searchByBarcode("0055122673");
     }
 
     function searchByBarcode(searchCode) { 
