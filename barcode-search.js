@@ -7,36 +7,39 @@
                             "Position": "position-result", "searchCode": "barcode-result" };
     var defaultBarcode = {"StockNum":"Not Found","CloneName":"Not Found","Box":"Not Found","Position":"Not Found"};
 
+    // search box element
+    let searchBox = document.getElementById("search-box");
+
     function editString(domElement, jsonObj) {
         document.getElementById(domElement).textContent = JSON.stringify(jsonObj).replace(/\"/g, '');
     }
 
     function test_func() {
-        document.querySelector("#search-box").value = document.getElementById("sample-barcode").textContent; //"0055122673" 
+        searchBox.value = "0055122673";
         
         search_func();
     }
 
-    // TODO: generalize to search_func(searchCode) 
-    function search_func() {
-        var searchCode = document.querySelector("#search-box").value;
+    function searchByBarcode(searchCode) { 
+        // open popup warning if no code was submitted
         if (searchCode === "") {
             let dialog2 = document.querySelector("x-dialog");
             dialog2.opened = true;
         } else {
-        console.log("Searching")
+        //get results
         results = store.get('barcode_data.' + searchCode);
+        // set default "Not Found" values if barcode is found in data
         if (!results) {
             results = defaultBarcode;
         }
-            // keeping this for debugging for now
-            document.getElementById('search-results').textContent = JSON.stringify(results);
-            for (var key in results) {
-                editString(resultsToDomMap[key], results[key]);
-            }
+        // convert to text, clean up, and update DOM elements 
+        // interating through DOM mappings and results by key 
+        for (var key in results) {
+            editString(resultsToDomMap[key], results[key]);
+        }
         // reset focus to search box
-        document.getElementById('search-box').value = "";
-        document.getElementById('search-box').focus();
+        searchBox.value = "";
+        searchBox.focus();
         // save results to search history
         searchHistory.push(results);
         }
@@ -54,8 +57,8 @@
                     'number of barcodes': num_records}
     }
 
-    document.getElementById("search-box").addEventListener('keypress', function (e) {
+    searchBox.addEventListener('keypress', function (e) {
         if (e.keyCode === 13) {
-            search_func();
+            searchByBarcode(searchBox.value);
         }
     });
