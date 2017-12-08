@@ -1,23 +1,29 @@
-    var app = require('electron').remote;
-    var dialog = app.dialog;
-    var session = app.session;
+    let app = require('electron').remote;
+    let dialog = app.dialog;
+    let session = app.session;
 
-    var resultsToDomMap = { "StockNum" : "stock-result", 
+    // map the properties of stored JSON objects to the appropriate DOM elements
+    let resultsToDomMap = { "StockNum" : "stock-result", 
                             "CloneName": "clone-result", "Box": "box-result", 
                             "Position": "position-result", "searchCode": "barcode-result" };
-    var defaultBarcode = {"StockNum":"Not Found","CloneName":"Not Found","Box":"Not Found","Position":"Not Found"};
+    
+    // in case no results are found, display this default result
+    let defaultBarcode = {"StockNum":"Not Found","CloneName":"Not Found","Box":"Not Found","Position":"Not Found"};
 
     // search box element
     let searchBox = document.getElementById("search-box");
 
+    // utility function
     function editString(domElement, jsonObj) {
         document.getElementById(domElement).textContent = JSON.stringify(jsonObj).replace(/\"/g, '');
     }
 
+    // searches with a sample barcode for stock number G17904
     function testWithSampleBarcode() {
         searchByBarcode("0055122673");
     }
 
+    // the main function
     function searchByBarcode(searchCode) { 
         // open popup warning if no code was submitted
         if (searchCode === "") {
@@ -26,6 +32,7 @@
         } else {
         //get results
         results = store.get('barcode_data.' + searchCode);
+        results.searchCode = searchCode;
         // set default "Not Found" values if barcode is found in data
         if (!results) {
             results = defaultBarcode;
@@ -34,6 +41,7 @@
         // interating through DOM mappings and results by key 
         for (var key in results) {
             editString(resultsToDomMap[key], results[key]);
+            console.log(key);
         }
         // reset focus to search box
         searchBox.value = "";
@@ -43,6 +51,7 @@
         }
     }
 
+    // gets information on the current barcode file in use
     function getBarcodeInfo () {
         var last_updated = store.get('updated');
         console.log(last_updated);
@@ -55,6 +64,7 @@
                     'number of barcodes': num_records}
     }
 
+    // set event listener so that return keypress will run a serch
     searchBox.addEventListener('keypress', function (e) {
         if (e.keyCode === 13) {
             searchByBarcode(searchBox.value);

@@ -72,7 +72,7 @@
           <x-icon name="help"></x-icon>
           <x-label>Instructions for updating barcode data</x-label>
         </x-menuitem>
-        <x-menuitem id="test-barcodes">
+        <x-menuitem id="test-barcodes-button">
           <x-icon name="help"></x-icon>
           <x-label>Test using sample barcode</x-label>
         </x-menuitem>
@@ -215,7 +215,8 @@
   let aboutDialog = document.querySelector("#about-dialog");
   let aboutDialogOKButton = document.querySelector("#about-dialog-ok-button");
   let aboutMenuItem = document.querySelector("#about-menu-item");
-
+  let testBarcodesButton = document.querySelector("#test-barcodes-button")
+  testBarcodesButton.addEventListener("click", testWithSampleBarcode)
 
   let disagreeButton = document.querySelector("#disagree-button");
 
