@@ -3,9 +3,9 @@
     let session = app.session;
 
     // map the properties of stored JSON objects to the appropriate DOM elements
-    let resultsToDomMap = { "StockNum" : "stock-result", 
-                            "CloneName": "clone-result", "Box": "box-result", 
-                            "Position": "position-result", "searchCode": "barcode-result" };
+    let resultsToDomMap = { "stockNum" : "stock-result", 
+                            "cloneName": "clone-result", "box": "box-result", 
+                            "position": "position-result", "searchCode": "barcode-result" };
     
     // in case no results are found, display this default result
     let defaultBarcode = {"StockNum":"Not Found","CloneName":"Not Found","Box":"Not Found","Position":"Not Found"};
@@ -40,9 +40,10 @@
         // convert to text, clean up, and update DOM elements 
         // interating through DOM mappings and results by key 
         for (var key in results) {
-            editString(resultsToDomMap[key], results[key]);
             console.log(key);
+            editString(resultsToDomMap[key], results[key]);
         }
+        document.getElementById("results-box").style.visibility = "visible";
         // reset focus to search box
         searchBox.value = "";
         searchBox.focus();

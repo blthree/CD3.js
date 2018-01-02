@@ -1,7 +1,7 @@
 var fs = require('fs');
-var app = require('electron').remote;
-var dialog = app.dialog;
-var session = app.session;
+//var app = require('electron').remote;
+//var dialog = app.dialog;
+//var session = app.session;
 const Store = require('electron-store');
 const store = new Store();
 

@@ -19,11 +19,8 @@ body {
   #menu-button{
    margin-left: 4px;
   }
-#drawer{
-    padding: 0px;
-}
-#drawer-contents {
-
+.result-field {
+    margin-left: 5px;
 }
 #controls {
     position: absolute;
@@ -61,7 +58,7 @@ padding: 0px;
 }
 #search-box-div {
     margin-left: 10px;
-    margin-top: 10px;
+    margin-top: 20px;
 }
 #search-box-label {
     padding-right: 10px;
