@@ -19,10 +19,10 @@ function loadtsv(fileName, callback) {
         for (i = 0; i < data.length; i++) {
             line = data[i].split("\t");
             json_data[line[0]] = {
-                "StockNum": line[1],
-                "CloneName": line[2],
-                "Box": line[3],
-                "Position": line[4]
+                "stockNum": line[1],
+                "cloneName": line[2],
+                "box": line[3],
+                "position": line[4]
             };
         }
         callback(null, json_data);
