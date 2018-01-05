@@ -6,7 +6,8 @@ electron.app.on('ready', function () {
   var mainWindow = new electron.BrowserWindow({
     width: 800,
     height: 500,
-    title: "ABRC Barcode Tool"
+    title: "ABRC Barcode Tool",
+    icon: __dirname + "datamatrix_icon.png"
   });
   mainWindow.loadURL('file://' + __dirname + '/index.html');
 

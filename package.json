@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "description": "Barcode Lookup for ABRC DNA Stocks",
   "main": "app.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-packager . --out=builds --platform=win32 --electron-version 1.7.9 --icon=datamatrix_icon.png --overwrite"
+  },
   "dependencies": {
     "electron-store": "^1.3.0",
     "xel": "^0.0.65"
