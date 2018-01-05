@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-packager . --out=builds --platform=win32 --electron-version 1.7.9 --prune=true --icon=datamatrix_icon.ico --overwrite",
+    "build": "electron-packager . --out=builds --platform=win32 --electron-version 1.7.9 --prune=true --icon=datamatrix_icon.ico --overwrite --ignore=builds, --ignore=.vscode --ignore=exports",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {

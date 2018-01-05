@@ -3,12 +3,21 @@
     let session = app.session;
 
     // map the properties of stored JSON objects to the appropriate DOM elements
-    let resultsToDomMap = { "stockNum" : "stock-result", 
-                            "cloneName": "clone-result", "box": "box-result", 
-                            "position": "position-result", "searchCode": "barcode-result" };
-    
+    let resultsToDomMap = {
+        "stockNum": "stock-result",
+        "cloneName": "clone-result",
+        "box": "box-result",
+        "position": "position-result",
+        "searchCode": "barcode-result"
+    };
+
     // in case no results are found, display this default result
-    let defaultBarcode = {"stockNum":"Not Found","cloneName":"Not Found","box":"Not Found","position":"Not Found"};
+    let defaultBarcode = {
+        "stockNum": "Not Found",
+        "cloneName": "Not Found",
+        "box": "Not Found",
+        "position": "Not Found"
+    };
 
     // search box element
     let searchBox = document.getElementById("search-box");
@@ -24,36 +33,36 @@
     }
 
     // the main function
-    function searchByBarcode(searchCode) { 
+    function searchByBarcode(searchCode) {
         // open popup warning if no code was submitted
         if (searchCode === "") {
             let dialog2 = document.querySelector("x-dialog");
             dialog2.opened = true;
         } else {
-        //get results
-        results = store.get('barcode_data.' + searchCode);
-        // set default "Not Found" values if barcode is found in data
-        if (!results) {
-            results = defaultBarcode;
-        }
-        results.searchCode = searchCode;
-        // convert to text, clean up, and update DOM elements 
-        // interating through DOM mappings and results by key 
-        for (var key in results) {
-            console.log(key);
-            editString(resultsToDomMap[key], results[key]);
-        }
-        document.getElementById("results-box").style.visibility = "visible";
-        // reset focus to search box
-        searchBox.value = "";
-        searchBox.focus();
-        // save results to search history
-        searchHistory.push(results);
+            //get results
+            results = store.get('barcode_data.' + searchCode);
+            // set default "Not Found" values if barcode is found in data
+            if (!results) {
+                results = defaultBarcode;
+            }
+            results.searchCode = searchCode;
+            // convert to text, clean up, and update DOM elements 
+            // interating through DOM mappings and results by key 
+            for (var key in results) {
+                console.log(key);
+                editString(resultsToDomMap[key], results[key]);
+            }
+            document.getElementById("results-box").style.visibility = "visible";
+            // reset focus to search box
+            searchBox.value = "";
+            searchBox.focus();
+            // save results to search history
+            searchHistory.push(results);
         }
     }
 
     // gets information on the current barcode file in use
-    function getBarcodeInfo () {
+    function getBarcodeInfo() {
         var last_updated = store.get('updated');
         console.log(last_updated);
         var num_records = Object.keys(store.get('barcode_data')).length;
@@ -61,8 +70,10 @@
         document.querySelector("#barcode-info-popup").opened = true;
         document.querySelector("#barcodes-count").textContent = num_records;
         document.querySelector("#barcodes-last-updated").textContent = last_updated;
-        return {'last updated': last_updated,
-                    'number of barcodes': num_records}
+        return {
+            'last updated': last_updated,
+            'number of barcodes': num_records
+        }
     }
 
     // set event listener so that return keypress will run a serch
