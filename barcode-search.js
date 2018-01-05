@@ -8,7 +8,7 @@
                             "position": "position-result", "searchCode": "barcode-result" };
     
     // in case no results are found, display this default result
-    let defaultBarcode = {"StockNum":"Not Found","CloneName":"Not Found","Box":"Not Found","Position":"Not Found"};
+    let defaultBarcode = {"stockNum":"Not Found","cloneName":"Not Found","box":"Not Found","position":"Not Found"};
 
     // search box element
     let searchBox = document.getElementById("search-box");
@@ -32,11 +32,11 @@
         } else {
         //get results
         results = store.get('barcode_data.' + searchCode);
-        results.searchCode = searchCode;
         // set default "Not Found" values if barcode is found in data
         if (!results) {
             results = defaultBarcode;
         }
+        results.searchCode = searchCode;
         // convert to text, clean up, and update DOM elements 
         // interating through DOM mappings and results by key 
         for (var key in results) {
